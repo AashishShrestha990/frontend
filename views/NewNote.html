@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Note</title>
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/fontawesome-free-5.8.2-web/css/all.css">
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="dashboard">
+
+
+
+        <nav>
+            <div class="logo">
+                <a href="ProjectList.html">
+                    <!--            <i class="fas fa-chart-pie fa-4x"></i>-->
+                    <img src="../images/donut-chart-png.png" height="50" width="50"/>
+                    <br/>
+                    <br/>
+
+                    <!--            <span class="fa fa-wordpress"></span>-->
+                    <span class="title">Smart Project Visualization</span>
+                </a>
+            </div>
+            <ul class="main-nav">
+                <li>
+                    <a href="Dashboard.html">
+                        <i class="fas fa-business-time"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="NewProject.html">
+                        <i class="far fa-clipboard"></i>
+
+                        Start a Project
+                    </a>
+                </li>
+                <li>
+                    <a href="ProjectList.html">
+                        <i class="fas fa-chart-bar"></i>
+
+                        Project Stats
+                    </a>
+                </li>
+
+                <li>
+                    <a href="NewNote.html">
+                        <i class="fas fa-pencil-alt"></i>
+
+                        Make Notes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="NoteList.html">
+                        <i class="far fa-edit"></i>
+                        My Notes
+                    </a>
+                </li>
+                <li>
+                    <a href="Profile.html">
+                        <i class="fas fa-user-alt"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="HelpPage.html">
+                        <i class="fas fa-file-alt"></i>
+                        Need Help?
+                    </a>
+                </li>
+                <li>
+                    <a onClick="logOut('token');" href="#">
+                        <i class="fas fa-sign-out-alt" ></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+<!--create a new note-->
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="mb-1">Make a Note</h1>
+                        <br />
+                        <form method="POST" enctype="multipart/form-data" id="newNoteForm">
+                            <div class="form-group">
+                                <label for="nname">Note Heading: </label>
+                                <input type="text" class="form-control" id="nname" name="n_title" placeholder="Note Header" >
+                            </div>
+                            <div class="form-group">
+                                <label for="ndesc">Start Writing:</label>
+                                <textarea class="form-control" id="ndesc" name="n_description" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="nimage">Attach a Image</label>
+                                <input type="file" class="form-control"  name="image" id="nimage">
+                            </div>
+
+                            <button type="submit" class="btn btn-success float-right">Make a Note</button>
+                            <a href="Dashboard.html" class="btn btn-danger ">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</div>
+</div>
+</div>
+
+
+</body>
+
+<script>
+    function logOut(keyname){
+        // console.log('responser');
+        window.localStorage.removeItem(keyname);
+        window.location.href = 'login.html';
+
+    }
+
+    var aToken = window.localStorage.getItem('token');
+    absentToken(aToken);
+
+    function absentToken(token) {
+        if (!token) {
+            window.location.href = "index.html"
+        }
+    }
+</script>
+
+<script type="text/javascript" src="../resources/js/jquery.js"></script>
+
+<script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../resources/js/note.js"></script>
+
+
+</html>
