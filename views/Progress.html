@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Progress</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/fontawesome-free-5.8.2-web/css/all.css">
+
+    <script type="text/javascript" src="../resources/js/userDashboard.js"></script>
+</head>
+<body>
+
+
+<!--<nav>-->
+<!--    <div class="logo">-->
+<!--        <a href="ProjectList.html">-->
+<!--            &lt;!&ndash;            <i class="fas fa-chart-pie fa-4x"></i>&ndash;&gt;-->
+<!--            <img src="../images/donut-chart-png.png" height="50" width="50"/>-->
+<!--            <br/>-->
+<!--            <br/>-->
+
+<!--            &lt;!&ndash;            <span class="fa fa-wordpress"></span>&ndash;&gt;-->
+<!--            <span class="title">Smart Project Visualization</span>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <ul class="main-nav">-->
+<!--        <li>-->
+<!--            <a href="Dashboard.html">-->
+<!--                <i class="fas fa-business-time"></i></i>-->
+<!--                Dashboard-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="NewProject.html">-->
+<!--                <i class="far fa-clipboard"></i>-->
+
+<!--                Start a Project-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="ProjectList.html">-->
+<!--                <i class="fas fa-chart-bar"></i>-->
+
+<!--                Project Stats-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li>-->
+<!--            <a href="NewNote.html">-->
+<!--                <i class="fas fa-pencil-alt"></i>-->
+
+<!--                Make Notes-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li>-->
+<!--            <a href="NoteList.html">-->
+<!--                <i class="far fa-edit"></i>-->
+<!--                My Notes-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="Profile.html">-->
+<!--                <i class="fas fa-user-alt"></i>-->
+<!--                Profile-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="login.html">-->
+<!--                <i class="fas fa-sign-out-alt"></i>-->
+<!--                Logout-->
+<!--            </a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<div class="container">
+    <canvas id="myChart"></canvas>
+</div>
+
+
+
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+        type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+            labels:['project name'],
+            datasets:[{
+                label:'Population',
+                data:[
+                    50
+
+                ],
+              //  backgroundColor:'green',
+                backgroundColor:[
+                    'rgba(26,0,192,0.6)',
+
+                ],
+                borderWidth:2,
+                borderColor:'#777',
+                hoverBorderWidth:3,
+                hoverBorderColor:'#07042b'
+            }]
+        },
+        options:{
+            title:{
+                display:true,
+                text:'All project Progress',
+                fontSize:25
+            },
+            legend:{
+                display:true,
+                position:'right',
+                labels:{
+                    fontColor:'#000'
+                }
+            },
+            layout:{
+                padding:{
+                    left:50,
+                    right:0,
+                    bottom:0,
+                    top:0
+                }
+            },
+            tooltips:{
+                enabled:true
+            }
+        }
+    });
+</script>
+
+<script>
+    function logOut(keyname){
+        // console.log('responser');
+        window.localStorage.removeItem(keyname);
+        window.location.href = 'login.html';
+
+    }
+
+    var aToken = window.localStorage.getItem('token');
+    absentToken(aToken);
+
+    function absentToken(token) {
+        if (!token) {
+            window.location.href = "index.html"
+        }
+    }
+</script>
+
+
+
+</body>
+</html>
