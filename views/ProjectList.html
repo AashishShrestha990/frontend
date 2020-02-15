@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/fontawesome-free-5.8.2-web/css/all.css">
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+    <div class="dashboard">
+
+
+
+
+        <nav>
+            <div class="logo">
+                <a href="ProjectList.html">
+                    <!--            <i class="fas fa-chart-pie fa-4x"></i>-->
+                    <img src="../images/donut-chart-png.png" height="50" width="50"/>
+                    <br/>
+                    <br/>
+
+                    <!--            <span class="fa fa-wordpress"></span>-->
+                    <span class="title">Smart Project Visualization</span>
+                </a>
+            </div>
+            <ul class="main-nav">
+                <li>
+                    <a href="Dashboard.html">
+                        <i class="fas fa-business-time"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="NewProject.html">
+                        <i class="far fa-clipboard"></i>
+
+                        Start a Project
+                    </a>
+                </li>
+                <li>
+                    <a href="ProjectList.html">
+                        <i class="fas fa-chart-bar"></i>
+
+                        Project Stats
+                    </a>
+                </li>
+
+                <li>
+                    <a href="NewNote.html">
+                        <i class="fas fa-pencil-alt"></i>
+
+                        Make Notes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="NoteList.html">
+                        <i class="far fa-edit"></i>
+                        My Notes
+                    </a>
+                </li>
+                <li>
+                    <a href="Profile.html">
+                        <i class="fas fa-user-alt"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="HelpPage.html">
+                        <i class="fas fa-file-alt"></i>
+                        Need Help?
+                    </a>
+                </li>
+                <li>
+                    <a onClick="logOut('token');" href="#">
+                        <i class="fas fa-sign-out-alt" ></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="mb-1">Project List</h1>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Project Description</th>
+<!--                                    <th>Updated Date</th>-->
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody id="projectList">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="EditProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel">Update Project</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+<!--                            edit project starts here-->
+                            <div class="container-fluid">
+                                <?php validate_post(); ?>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+<!--                                                    <h1 class="mb-1">Edit Project</h1>-->
+<!--                                                    <br />-->
+                                                    <form method="POST" id="proEditForm">
+                                                        <div class="form-group">
+                                                            <label for="pname">Project Title:</label>
+                                                            <input type="text"  class="form-control" id="pname" name="p_title" placeholder="Project Title" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="pdesc">Project Description:</label>
+                                                            <textarea class="form-control" id="pdesc" name="p_description" rows="4"></textarea>
+                                                        </div>
+
+
+                                                        <h4>Adjust Your Progress</h4>
+
+                                                        <div class="slidecontainer">
+                                                            <input type="range" min="1" max="100" class="slider" id="myRange">
+                                                            <p>Value: <span id="demo"></span></p>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-success float-right">Re-Publish</button>
+
+
+                                                        <!--                                                        <div class="progress">-->
+<!--                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                                        </div>-->
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="container">
+                <canvas id="myChart"></canvas>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <script>
+            function logOut(keyname){
+                // console.log('responser');
+                window.localStorage.removeItem(keyname);
+                window.location.href = 'login.html';
+
+            }
+
+            var aToken = window.localStorage.getItem('token');
+            absentToken(aToken);
+
+            function absentToken(token) {
+                if (!token) {
+                    window.location.href = "index.html"
+                }
+            }
+        </script>
+
+        <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+        </script>
+
+
+        <script type="text/javascript" src="../resources/js/jquery.js"></script>
+
+        <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="../resources/js/project.js"></script>
+
+
+
+</body>
+</html>
+
